@@ -1,0 +1,2 @@
+Android NDK: ERROR:/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/jni/Android.mk:tensorflow-lite: LOCAL_SRC_FILES points to a missing file    
+Android NDK: Check that /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/jni/../../common/jni/tensorflow-lite/lib/arm64/libtensorflow-lite.a exists  or that its path is correct   

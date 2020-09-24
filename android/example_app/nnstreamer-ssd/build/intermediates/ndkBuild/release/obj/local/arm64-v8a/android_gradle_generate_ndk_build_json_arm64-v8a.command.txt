@@ -1,0 +1,21 @@
+Executable : /home/ssafy/Android/tools/sdk/ndk/21.3.6528147/ndk-build
+arguments : 
+NDK_PROJECT_PATH=null
+APP_BUILD_SCRIPT=/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/jni/Android.mk
+NDK_APPLICATION_MK=/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/jni/Application.mk
+APP_ABI=arm64-v8a
+NDK_ALL_ABIS=arm64-v8a
+NDK_DEBUG=0
+APP_PLATFORM=android-24
+NDK_OUT=/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/build/intermediates/ndkBuild/release/obj
+NDK_LIBS_OUT=/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/build/intermediates/ndkBuild/release/lib
+NDK_APPLICATION_MK=jni/Application.mk
+GSTREAMER_JAVA_SRC_DIR=src
+GSTREAMER_ROOT_ANDROID=/home/ssafy/Android/gstreamer-1.0
+GSTREAMER_ASSETS_DIR=src/assets
+APP_SHORT_COMMANDS=false
+LOCAL_SHORT_COMMANDS=false
+-B
+-n
+jvmArgs : 
+
