@@ -1,0 +1,2 @@
+/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/capi-sample/src/main/jni/Android.mk:6: /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/capi-sample/src/main/jni/Android-nnstreamer-prebuilt.mk: 그런 파일이나 디렉터리가 없습니다
+make: *** No rule to make target '/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/capi-sample/src/main/jni/Android-nnstreamer-prebuilt.mk'.  Stop.

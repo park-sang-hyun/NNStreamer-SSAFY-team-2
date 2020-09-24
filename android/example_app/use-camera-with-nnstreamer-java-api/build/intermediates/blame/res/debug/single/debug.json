@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/use-camera-with-nnstreamer-java-api/build/intermediates/res/merged/debug/layout_activity_main.xml.flat",
+        "source": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/use-camera-with-nnstreamer-java-api/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/use-camera-with-nnstreamer-java-api/build/intermediates/res/merged/debug/drawable_nnsuite_logo.png.flat",
+        "source": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/use-camera-with-nnstreamer-java-api/src/main/res/drawable/nnsuite_logo.png"
+    }
+]

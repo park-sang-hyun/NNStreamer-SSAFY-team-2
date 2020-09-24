@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "applicationId": "com.samsung.android.nnstreamer.cameraWithNNSJAVAAPI",
+  "variantType": "BASE_APK",
+  "elements": [
+    {
+      "outputType": {
+        "type": "BUNDLE_MANIFEST"
+      },
+      "apkData": {
+        "type": "MAIN",
+        "splits": [],
+        "versionCode": 1,
+        "versionName": "1.0",
+        "outputFile": "use-camera-with-nnstreamer-java-api-debug.apk",
+        "fullName": "debug",
+        "baseName": "debug",
+        "dirName": ""
+      },
+      "path": "AndroidManifest.xml",
+      "properties": {
+        "packageId": "com.samsung.android.nnstreamer.cameraWithNNSJAVAAPI",
+        "split": "",
+        "minSdkVersion": "26"
+      }
+    }
+  ]
+}
