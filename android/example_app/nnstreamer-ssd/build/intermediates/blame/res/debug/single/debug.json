@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/build/intermediates/res/merged/debug/layout_main.xml.flat",
+        "source": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/res/layout/main.xml"
+    },
+    {
+        "merged": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/build/intermediates/res/merged/debug/layout_activity_setting.xml.flat",
+        "source": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/res/layout/activity_setting.xml"
+    },
+    {
+        "merged": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/build/intermediates/res/merged/debug/layout_activity_loading.xml.flat",
+        "source": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/res/layout/activity_loading.xml"
+    },
+    {
+        "merged": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/build/intermediates/res/merged/debug/drawable_nnsuite_logo.png.flat",
+        "source": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/res/drawable/nnsuite_logo.png"
+    },
+    {
+        "merged": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/build/intermediates/res/merged/debug/xml_network_security_config.xml.flat",
+        "source": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/res/xml/network_security_config.xml"
+    },
+    {
+        "merged": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/build/intermediates/res/merged/debug/drawable_ssafy_logo.png.flat",
+        "source": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/res/drawable/ssafy_logo.png"
+    }
+]
