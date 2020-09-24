@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: ./api-sample/libs/nnstreamer-2020-09-20.aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ca764666a9b88ac7b464bb846ec3ecdf/nnstreamer-2020-09-20/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ca764666a9b88ac7b464bb846ec3ecdf/nnstreamer-2020-09-20/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ca764666a9b88ac7b464bb846ec3ecdf/nnstreamer-2020-09-20/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

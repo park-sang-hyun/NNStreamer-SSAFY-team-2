@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -55,9 +57,16 @@ public class NNStreamerActivity extends Activity implements
     private ImageButton buttonPlay;
     private ImageButton buttonStop;
 
+    // Test Button //
+    private Button buttonSetting;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        /* LaodingActivity */
+//        Intent intent = new Intent(this, LoadingActivity.class);
+//        startActivity(intent);
 
         /* Check permissions */
         if (!checkPermission(Manifest.permission.CAMERA) ||
@@ -193,6 +202,9 @@ public class NNStreamerActivity extends Activity implements
             buttonPlay.setVisibility(View.VISIBLE);
             buttonStop.setVisibility(View.GONE);
             break;
+        case R.id.main_button_setting:
+            Intent intent = new Intent(NNStreamerActivity.this, SettingActivity.class);
+            startActivity(intent);
         default:
             break;
         }
@@ -259,6 +271,9 @@ public class NNStreamerActivity extends Activity implements
 
         buttonStop = (ImageButton) this.findViewById(R.id.main_button_stop);
         buttonStop.setOnClickListener(this);
+
+        buttonSetting = (Button) this.findViewById(R.id.main_button_setting);
+        buttonSetting.setOnClickListener(this);
 
         /* Video surface for camera */
         SurfaceView sv = (SurfaceView) this.findViewById(R.id.main_surface_video);

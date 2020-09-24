@@ -1,0 +1,19 @@
+{
+  "buildFiles": [
+    "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/capi-sample/src/main/jni/Android.mk",
+    "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/capi-sample/src/main/jni/Application.mk"
+  ],
+  "cleanCommands": [
+    "/home/ssafy/Android/tools/sdk/ndk/21.3.6528147/ndk-build NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003d/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/capi-sample/src/main/jni/Android.mk NDK_APPLICATION_MK\u003d/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/capi-sample/src/main/jni/Application.mk APP_ABI\u003darm64-v8a NDK_ALL_ABIS\u003darm64-v8a NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-26 NDK_OUT\u003d/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/capi-sample/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003d/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/capi-sample/build/intermediates/ndkBuild/release/lib clean"
+  ],
+  "buildTargetsCommand": "/home/ssafy/Android/tools/sdk/ndk/21.3.6528147/ndk-build NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003d/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/capi-sample/src/main/jni/Android.mk NDK_APPLICATION_MK\u003d/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/capi-sample/src/main/jni/Application.mk APP_ABI\u003darm64-v8a NDK_ALL_ABIS\u003darm64-v8a NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-26 NDK_OUT\u003d/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/capi-sample/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003d/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/capi-sample/build/intermediates/ndkBuild/release/lib {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "nnstreamer-sample-release-arm64-v8a": {
+      "artifactName": "nnstreamer-sample",
+      "buildCommand": "/home/ssafy/Android/tools/sdk/ndk/21.3.6528147/ndk-build NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003d/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/capi-sample/src/main/jni/Android.mk NDK_APPLICATION_MK\u003d/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/capi-sample/src/main/jni/Application.mk APP_ABI\u003darm64-v8a NDK_ALL_ABIS\u003darm64-v8a NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-26 NDK_OUT\u003d/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/capi-sample/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003d/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/capi-sample/build/intermediates/ndkBuild/release/lib /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/capi-sample/build/intermediates/ndkBuild/release/obj/local/arm64-v8a/libnnstreamer-sample.so",
+      "abi": "arm64-v8a",
+      "output": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/capi-sample/build/intermediates/ndkBuild/release/obj/local/arm64-v8a/libnnstreamer-sample.so",
+      "runtimeFiles": []
+    }
+  }
+}
