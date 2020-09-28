@@ -17,7 +17,6 @@ android {
                 if (project.hasProperty('gstAndroidRoot'))
                     gstRoot = project.gstAndroidRoot
                 else
-//                    gstRoot = "/home/ssafy/Android/gstreamer-1.0"
                     gstRoot = System.env.GSTREAMER_ROOT_ANDROID
 
                 if (gstRoot == null)
