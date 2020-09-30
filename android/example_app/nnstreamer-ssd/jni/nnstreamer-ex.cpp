@@ -393,19 +393,21 @@ ssd_draw_object (cairo_t * cr, ssd_object_s * objects, const gint size)
     /* draw rectangle */
     cairo_rectangle (cr, x, y, width, height);
     cairo_set_source_rgb (cr, red, green, blue);
-    cairo_set_line_width (cr, 1.5);
+    cairo_set_line_width (cr, 0); // 1.5 -> 0
     cairo_stroke (cr);
 
     /* draw title */
     if (nns_ex_get_label (objects[i].class_id, &label)) {
       cairo_move_to (cr, x + 5, y + 15);
-      cairo_text_path (cr, label);
+      cairo_text_path (cr, ""); // label -> ""
       cairo_set_source_rgb (cr, red, green, blue);
       cairo_fill_preserve (cr);
       cairo_set_source_rgb (cr, 1, 1, 1);
       cairo_set_line_width (cr, .3);
       cairo_stroke (cr);
       cairo_fill_preserve (cr);
+
+      nns_logd ("capture now : %s", label);
     } else {
       nns_logd ("Failed to get label (class id %d)", objects[i].class_id);
     }
