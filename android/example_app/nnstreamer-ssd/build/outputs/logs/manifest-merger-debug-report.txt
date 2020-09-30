@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:2:1-40:12
-INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:2:1-40:12
-INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:2:1-40:12
-INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:2:1-40:12
+ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:2:1-41:12
+INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:2:1-41:12
+INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:2:1-41:12
+INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:2:1-41:12
 MERGED from [com.android.support.constraint:constraint-layout:2.0.1] /home/ssafy/.gradle/caches/transforms-2/files-2.1/46004820cab87543f1baf027040f7a07/constraint-layout-2.0.1/AndroidManifest.xml:2:1-11:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] /home/ssafy/.gradle/caches/transforms-2/files-2.1/02a0b5591867b269bf90099dda756d74/appcompat-v7-28.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:28.0.0] /home/ssafy/.gradle/caches/transforms-2/files-2.1/7c3616f46c233483189f28c6aecc1bf8/support-fragment-28.0.0/AndroidManifest.xml:17:1-22:12
@@ -31,57 +31,57 @@ MERGED from [android.arch.lifecycle:livedata:1.1.1] /home/ssafy/.gradle/caches/t
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /home/ssafy/.gradle/caches/transforms-2/files-2.1/7f446c61d119859cc910274a8162160c/livedata-core-1.1.1/AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] /home/ssafy/.gradle/caches/transforms-2/files-2.1/8ce8513e0c0ed0e577ea55f824679bf4/runtime-1.1.1/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:interpolator:28.0.0] /home/ssafy/.gradle/caches/transforms-2/files-2.1/d7fd0a6b82dbac033f938c982be39bd3/interpolator-28.0.0/AndroidManifest.xml:17:1-22:12
-INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:2:1-40:12
-INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:2:1-40:12
-INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:2:1-40:12
+INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:2:1-41:12
+INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:2:1-41:12
+INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:2:1-41:12
 	package
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:4:5-51
-		INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml
-		INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:4:5-51
+		INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml
+		INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml
 	android:versionName
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:6:5-30
-		INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml
-		INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:6:5-30
+		INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml
+		INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml
 	xmlns:tools
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:3:5-51
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:3:5-51
 	xmlns:android
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:2:11-69
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:2:11-69
 	android:versionCode
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:5:5-28
-		INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml
-		INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:5:5-28
+		INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml
+		INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml
 uses-feature#0x00020000
-ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:8:5-54
+ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:8:5-54
 	android:glEsVersion
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:8:19-51
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:8:19-51
 uses-feature#android.hardware.camera
-ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:9:5-11:36
+ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:9:5-11:36
 	android:required
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:11:9-33
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:11:9-33
 	android:name
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:10:9-47
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:10:9-47
 uses-permission#android.permission.CAMERA
-ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:13:5-65
+ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:13:5-65
 	android:name
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:13:22-62
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:13:22-62
 uses-permission#android.permission.INTERNET
-ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:14:5-67
+ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:14:5-67
 	android:name
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:14:22-64
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:14:22-64
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:15:5-80
+ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:15:5-80
 	android:name
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:15:22-77
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:15:22-77
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:16:5-81
+ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:16:5-81
 	android:name
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:16:22-78
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:16:22-78
 uses-permission#android.permission.WAKE_LOCK
-ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:17:5-68
+ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:17:5-68
 	android:name
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:17:22-65
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:17:22-65
 application
-ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:19:5-38:19
+ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:19:5-39:19
 MERGED from [com.android.support.constraint:constraint-layout:2.0.1] /home/ssafy/.gradle/caches/transforms-2/files-2.1/46004820cab87543f1baf027040f7a07/constraint-layout-2.0.1/AndroidManifest.xml:9:5-20
 MERGED from [com.android.support.constraint:constraint-layout:2.0.1] /home/ssafy/.gradle/caches/transforms-2/files-2.1/46004820cab87543f1baf027040f7a07/constraint-layout-2.0.1/AndroidManifest.xml:9:5-20
 MERGED from [com.android.support:support-compat:28.0.0] /home/ssafy/.gradle/caches/transforms-2/files-2.1/00567bd0de14b33d1bf8a440dc72bff8/support-compat-28.0.0/AndroidManifest.xml:22:5-94
@@ -91,47 +91,51 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] /home/ssafy/.gradle
 	android:appComponentFactory
 		ADDED from [com.android.support:support-compat:28.0.0] /home/ssafy/.gradle/caches/transforms-2/files-2.1/00567bd0de14b33d1bf8a440dc72bff8/support-compat-28.0.0/AndroidManifest.xml:22:18-91
 	android:label
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:22:9-41
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:22:9-41
 	android:hardwareAccelerated
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:20:9-43
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:20:9-43
 	tools:ignore
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:25:9-48
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:25:9-48
 	android:icon
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:21:9-46
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:21:9-46
 	android:theme
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:24:9-67
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:24:9-67
 	android:networkSecurityConfig
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:23:9-69
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:23:9-69
+activity#org.freedesktop.gstreamer.nnstreamer.PreviewActivity
+ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:26:9-62
+	android:name
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:26:19-50
 activity#org.freedesktop.gstreamer.nnstreamer.SettingActivity
-ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:26:9-62
+ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:27:9-53
 	android:name
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:26:19-50
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:27:19-50
 activity#org.freedesktop.gstreamer.nnstreamer.LoadingActivity
-ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:27:9-53
+ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:28:9-53
 	android:name
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:27:19-50
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:28:19-50
 activity#org.freedesktop.gstreamer.nnstreamer.NNStreamerActivity
-ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:28:9-37:20
+ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:29:9-38:20
 	android:screenOrientation
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:31:13-50
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:32:13-49
 	android:label
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:30:13-45
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:31:13-45
 	android:name
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:29:13-47
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:30:13-47
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:32:13-36:29
+ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:33:13-37:29
 action#android.intent.action.MAIN
-ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:33:17-69
+ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:34:17-69
 	android:name
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:33:25-66
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:34:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:35:17-77
+ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:36:17-77
 	android:name
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml:35:27-74
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml:36:27-74
 uses-sdk
-INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml
-INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml
+INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml
+INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml
 MERGED from [com.android.support.constraint:constraint-layout:2.0.1] /home/ssafy/.gradle/caches/transforms-2/files-2.1/46004820cab87543f1baf027040f7a07/constraint-layout-2.0.1/AndroidManifest.xml:5:5-7:41
 MERGED from [com.android.support.constraint:constraint-layout:2.0.1] /home/ssafy/.gradle/caches/transforms-2/files-2.1/46004820cab87543f1baf027040f7a07/constraint-layout-2.0.1/AndroidManifest.xml:5:5-7:41
 MERGED from [com.android.support:appcompat-v7:28.0.0] /home/ssafy/.gradle/caches/transforms-2/files-2.1/02a0b5591867b269bf90099dda756d74/appcompat-v7-28.0.0/AndroidManifest.xml:20:5-44
@@ -186,13 +190,13 @@ MERGED from [android.arch.core:runtime:1.1.1] /home/ssafy/.gradle/caches/transfo
 MERGED from [android.arch.core:runtime:1.1.1] /home/ssafy/.gradle/caches/transforms-2/files-2.1/8ce8513e0c0ed0e577ea55f824679bf4/runtime-1.1.1/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:interpolator:28.0.0] /home/ssafy/.gradle/caches/transforms-2/files-2.1/d7fd0a6b82dbac033f938c982be39bd3/interpolator-28.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:interpolator:28.0.0] /home/ssafy/.gradle/caches/transforms-2/files-2.1/d7fd0a6b82dbac033f938c982be39bd3/interpolator-28.0.0/AndroidManifest.xml:20:5-44
-INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml
-INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml
+INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml
+INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml
-		INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml
+		INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml
+		INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml
-		ADDED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml
-		INJECTED from /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/AndroidManifest.xml
+		INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml
+		ADDED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml
+		INJECTED from /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/AndroidManifest.xml

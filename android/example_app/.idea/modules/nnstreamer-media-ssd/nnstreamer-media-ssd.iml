@@ -141,6 +141,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../nnstreamer-media-ssd/src/test/jni" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../nnstreamer-media-ssd/src/test/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../nnstreamer-media-ssd/src/test/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../nnstreamer-media-ssd" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/../../../nnstreamer-media-ssd/.cxx" />
       <excludeFolder url="file://$MODULE_DIR$/../../../nnstreamer-media-ssd/.externalNativeBuild" />
       <excludeFolder url="file://$MODULE_DIR$/../../../nnstreamer-media-ssd/build" />

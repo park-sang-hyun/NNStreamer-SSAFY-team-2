@@ -6,10 +6,18 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Camera;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
+import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.view.PixelCopy;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -23,12 +31,13 @@ import android.support.v4.content.ContextCompat;
 import org.freedesktop.gstreamer.GStreamer;
 import org.freedesktop.gstreamer.GStreamerSurfaceView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 
 public class NNStreamerActivity extends Activity implements
         SurfaceHolder.Callback,
-        View.OnClickListener {
+        View.OnClickListener, PixelCopy.OnPixelCopyFinishedListener {
     private static final String TAG = "NNStreamer";
     private static final int PERMISSION_REQUEST_ALL = 3;
     private static final int PIPELINE_ID = 1;
@@ -57,8 +66,13 @@ public class NNStreamerActivity extends Activity implements
     private ImageButton buttonPlay;
     private ImageButton buttonStop;
 
-    // Test Button //
     private Button buttonSetting;
+    private Button buttonGallery;
+    private Button buttonCapture;
+
+    private SurfaceView surfaceView;
+
+    private static final int CAMERA_REQUEST = 1888;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -203,12 +217,53 @@ public class NNStreamerActivity extends Activity implements
             buttonStop.setVisibility(View.GONE);
             break;
         case R.id.main_button_setting:
-            Intent intent = new Intent(NNStreamerActivity.this, SettingActivity.class);
-            startActivity(intent);
+            Intent intent_setting = new Intent(NNStreamerActivity.this, SettingActivity.class);
+            startActivity(intent_setting);
+            break;
+        case R.id.main_button_gallery:
+            Intent pickerIntent = new Intent(Intent.ACTION_PICK);
+            pickerIntent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+            pickerIntent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+            startActivityForResult(pickerIntent,100);
+            break;
+        case R.id.main_button_capture:
+            nativePause();
+//            Bitmap bitmap = viewToBitmap(surfaceView);
+            Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
+                surfaceView.getHeight(), Bitmap.Config.ARGB_8888);;
+            PixelCopy.request(surfaceView,bitmap,this,new Handler());
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
+            byte[] byteArray = stream.toByteArray();
+
+            Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
+            previewIntent.putExtra("photo", byteArray);
+            startActivity(previewIntent);
+            break;
         default:
             break;
         }
     }
+
+    public static Bitmap viewToBitmap(View view) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(),
+                view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+//        canvas.drawColor(Color.WHITE);
+        if (view instanceof SurfaceView) {
+            SurfaceView surfaceView = (SurfaceView) view;
+            surfaceView.setZOrderOnTop(true);
+            surfaceView.draw(canvas);
+            surfaceView.setZOrderOnTop(false);
+            return bitmap;
+        } else {
+            //For ViewGroup & View
+            view.draw(canvas);
+            return bitmap;
+        }
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -275,9 +330,15 @@ public class NNStreamerActivity extends Activity implements
         buttonSetting = (Button) this.findViewById(R.id.main_button_setting);
         buttonSetting.setOnClickListener(this);
 
+        buttonGallery = (Button) this.findViewById(R.id.main_button_gallery);
+        buttonGallery.setOnClickListener(this);
+
+        buttonCapture = (Button) this.findViewById(R.id.main_button_capture);
+        buttonCapture.setOnClickListener(this);
+
         /* Video surface for camera */
-        SurfaceView sv = (SurfaceView) this.findViewById(R.id.main_surface_video);
-        SurfaceHolder sh = sv.getHolder();
+        surfaceView = (SurfaceView) this.findViewById(R.id.main_surface_video);
+        SurfaceHolder sh = surfaceView.getHolder();
         sh.addCallback(this);
 
         /* Start with disabled buttons, until the pipeline in native code is initialized. */
@@ -410,5 +471,10 @@ public class NNStreamerActivity extends Activity implements
         });
 
         builder.show();
+    }
+
+    @Override
+    public void onPixelCopyFinished(int i) {
+
     }
 }

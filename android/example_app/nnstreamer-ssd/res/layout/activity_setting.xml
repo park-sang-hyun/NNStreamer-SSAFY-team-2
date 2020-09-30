@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#fff">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,8 +12,10 @@
         android:layout_weight="3">
 
         <TextView
+            android:id="@+id/setting_textView_ConditionList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></TextView>
+            android:layout_height="match_parent"
+            android:text=""></TextView>
 
     </LinearLayout>
 
@@ -39,6 +42,7 @@
                     android:text="Object" />
                 <Spinner
                     android:id="@+id/setting_spinner"
+                    android:entries="@array/object_array"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content">
 
@@ -56,6 +60,7 @@
                     android:text="Number" />
 
                 <EditText
+                    android:id="@+id/setting_editText_Number"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"></EditText>
