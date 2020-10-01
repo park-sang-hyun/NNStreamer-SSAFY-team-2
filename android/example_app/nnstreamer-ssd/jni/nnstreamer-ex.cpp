@@ -16,6 +16,7 @@
 #include <math.h>
 #include <gst/gst.h>
 #include <cairo/cairo.h>
+#include <map>
 
 #include "nnstreamer-jni.h"
 
@@ -74,6 +75,7 @@ static gint launch_option = 0;
 static nns_ex_model_info_s nns_ex_model_info;
 static GMutex res_mutex;
 static std::vector<ssd_object_s> detected_object;
+static std::map<gchararray, gint> detected_object_list;
 
 /**
  * @brief Read strings from file.
@@ -406,10 +408,24 @@ ssd_draw_object (cairo_t * cr, ssd_object_s * objects, const gint size)
       cairo_set_line_width (cr, .3);
       cairo_stroke (cr);
       cairo_fill_preserve (cr);
+
+      if( detected_object_list.find(label) != detected_object_list.end()){
+          detected_object_list[label]++;
+      }else{
+          detected_object_list[label] = 1;
+      }
+
+      nns_logd ("now capture : %s", label);
     } else {
       nns_logd ("Failed to get label (class id %d)", objects[i].class_id);
     }
   }
+
+    nns_logd ("now set");
+    for(auto j = detected_object_list.begin(); j != detected_object_list.end(); j++){
+        nns_logd ("name : %s, count : %d", j->first, j->second);
+    }
+    detected_object_list.clear();
 }
 
 /**

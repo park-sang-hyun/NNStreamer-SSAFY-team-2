@@ -67,6 +67,9 @@ public class NNStreamerActivity extends Activity implements
     private DownloadModel downloadTask = null;
     private ArrayList<String> downloadList = new ArrayList<>();
 
+    private ArrayList<String> kind = new ArrayList<>();
+    private ArrayList<Integer> count = new ArrayList<>();
+
     private ImageButton buttonPlay;
     private ImageButton buttonStop;
 
@@ -169,7 +172,6 @@ public class NNStreamerActivity extends Activity implements
                 }
 
                 nativePlay();
-
                 /* Update UI (buttons and other components) */
 //                buttonPlay.setVisibility(View.GONE);
 //                buttonStop.setVisibility(View.VISIBLE);
@@ -278,6 +280,13 @@ public class NNStreamerActivity extends Activity implements
         if(requestCode == 200 && resultCode == RESULT_OK){
             String conditionList = data.getStringExtra("conditionList");
             textViewConditionList.setText(conditionList);
+
+            String[] s = conditionList.split(" : |\\n");
+
+            for(int i=0; i<s.length; i++){
+                if(i%2 == 0) kind.add(s[0]);
+                else count.add(new Integer(s[0]));
+            }
         }
     }
 
