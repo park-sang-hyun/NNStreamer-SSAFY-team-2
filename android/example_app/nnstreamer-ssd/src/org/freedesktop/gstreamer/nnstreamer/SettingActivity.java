@@ -18,6 +18,8 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
 
     private Button buttonAdd;
     private Button buttonReset;
+    private Button buttonComplete;
+    private Button buttonDeleteList;
 
     private Spinner objectSpinner;
 
@@ -46,6 +48,12 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
         buttonReset = (Button) this.findViewById(R.id.setting_button_reset);
         buttonReset.setOnClickListener(this);
 
+        buttonComplete = (Button) this.findViewById(R.id.setting_button_settingComplete);
+        buttonComplete.setOnClickListener(this);
+
+        buttonDeleteList = (Button) this.findViewById(R.id.setting_button_deleteList);
+        buttonDeleteList.setOnClickListener(this);
+
         objectSpinner = (Spinner) findViewById(R.id.setting_spinner);
         objectSpinner.setOnItemSelectedListener(this);
 
@@ -70,6 +78,16 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
                 break;
             case R.id.setting_button_reset:
                 editTextNumber.setText("");
+                break;
+            case R.id.setting_button_settingComplete:
+                String data = textViewConditionList.getText().toString();
+                Intent intent = new Intent();//startActivity()를 할것이 아니므로 그냥 빈 인텐트로 만듦
+                intent.putExtra("conditionList",data);
+                setResult(RESULT_OK,intent);
+                finish();
+                break;
+            case R.id.setting_button_deleteList:
+                textViewConditionList.setText("");
                 break;
             default:
                 break;
