@@ -16,6 +16,7 @@ import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.PixelCopy;
 import android.view.SurfaceHolder;
@@ -23,6 +24,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import android.support.v4.app.ActivityCompat;
@@ -34,6 +36,8 @@ import org.freedesktop.gstreamer.GStreamerSurfaceView;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class NNStreamerActivity extends Activity implements
         SurfaceHolder.Callback,
@@ -71,6 +75,9 @@ public class NNStreamerActivity extends Activity implements
     private Button buttonCapture;
 
     private SurfaceView surfaceView;
+
+    private TextView textViewConditionList;
+    private TextView textViewCountDown;
 
     private static final int CAMERA_REQUEST = 1888;
 
@@ -164,9 +171,9 @@ public class NNStreamerActivity extends Activity implements
                 nativePlay();
 
                 /* Update UI (buttons and other components) */
-                buttonPlay.setVisibility(View.GONE);
-                buttonStop.setVisibility(View.VISIBLE);
-                enableButton(true);
+//                buttonPlay.setVisibility(View.GONE);
+//                buttonStop.setVisibility(View.VISIBLE);
+//                enableButton(true);
             }
         });
     }
@@ -206,64 +213,73 @@ public class NNStreamerActivity extends Activity implements
         }
 
         switch (viewId) {
-        case R.id.main_button_play:
-            nativePlay();
-            buttonPlay.setVisibility(View.GONE);
-            buttonStop.setVisibility(View.VISIBLE);
-            break;
-        case R.id.main_button_stop:
-            nativePause();
-            buttonPlay.setVisibility(View.VISIBLE);
-            buttonStop.setVisibility(View.GONE);
-            break;
+//        case R.id.main_button_play:
+//            nativePlay();
+//            buttonPlay.setVisibility(View.GONE);
+//            buttonStop.setVisibility(View.VISIBLE);
+//            break;
+//        case R.id.main_button_stop:
+//            nativePause();
+//            buttonPlay.setVisibility(View.VISIBLE);
+//            buttonStop.setVisibility(View.GONE);
+//            break;
         case R.id.main_button_setting:
             Intent intent_setting = new Intent(NNStreamerActivity.this, SettingActivity.class);
-            startActivity(intent_setting);
+            startActivityForResult(intent_setting, 200);
+
             break;
         case R.id.main_button_gallery:
             Intent pickerIntent = new Intent(Intent.ACTION_PICK);
             pickerIntent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
             pickerIntent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-            startActivityForResult(pickerIntent,100);
+//            startActivityForResult(pickerIntent,100);
+            startActivity(pickerIntent);
             break;
         case R.id.main_button_capture:
-            nativePause();
-//            Bitmap bitmap = viewToBitmap(surfaceView);
-            Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
-                surfaceView.getHeight(), Bitmap.Config.ARGB_8888);;
-            PixelCopy.request(surfaceView,bitmap,this,new Handler());
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
-            byte[] byteArray = stream.toByteArray();
 
-            Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
-            previewIntent.putExtra("photo", byteArray);
-            startActivity(previewIntent);
+            CountDownTimer countDownTimer = new CountDownTimer(3000, 1000) {
+                public void onTick(long millisUntilFinished) {
+                    textViewCountDown.setText(String.format(Locale.getDefault(), "%d", millisUntilFinished / 1000L));
+                }
+
+                public void onFinish() {
+                    textViewCountDown.setText("Done.");
+                }
+            }.start();
+            new Handler().postDelayed(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    nativePause();
+                    Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
+                            surfaceView.getHeight(), Bitmap.Config.ARGB_8888);;
+                    PixelCopy.request(surfaceView,bitmap,NNStreamerActivity.this,new Handler());
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
+                    byte[] byteArray = stream.toByteArray();
+
+                    Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
+                    previewIntent.putExtra("photo", byteArray);
+                    startActivity(previewIntent);
+                }
+            }, 3000);
+
             break;
         default:
             break;
         }
     }
 
-    public static Bitmap viewToBitmap(View view) {
-        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(),
-                view.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-//        canvas.drawColor(Color.WHITE);
-        if (view instanceof SurfaceView) {
-            SurfaceView surfaceView = (SurfaceView) view;
-            surfaceView.setZOrderOnTop(true);
-            surfaceView.draw(canvas);
-            surfaceView.setZOrderOnTop(false);
-            return bitmap;
-        } else {
-            //For ViewGroup & View
-            view.draw(canvas);
-            return bitmap;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 200 && resultCode == RESULT_OK){
+            String conditionList = data.getStringExtra("conditionList");
+            textViewConditionList.setText(conditionList);
         }
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -321,11 +337,11 @@ public class NNStreamerActivity extends Activity implements
 
         setContentView(R.layout.main);
 
-        buttonPlay = (ImageButton) this.findViewById(R.id.main_button_play);
-        buttonPlay.setOnClickListener(this);
-
-        buttonStop = (ImageButton) this.findViewById(R.id.main_button_stop);
-        buttonStop.setOnClickListener(this);
+//        buttonPlay = (ImageButton) this.findViewById(R.id.main_button_play);
+//        buttonPlay.setOnClickListener(this);
+//
+//        buttonStop = (ImageButton) this.findViewById(R.id.main_button_stop);
+//        buttonStop.setOnClickListener(this);
 
         buttonSetting = (Button) this.findViewById(R.id.main_button_setting);
         buttonSetting.setOnClickListener(this);
@@ -336,13 +352,17 @@ public class NNStreamerActivity extends Activity implements
         buttonCapture = (Button) this.findViewById(R.id.main_button_capture);
         buttonCapture.setOnClickListener(this);
 
+        textViewConditionList = (TextView) this.findViewById(R.id.main_textview_conditions);
+
+        textViewCountDown = (TextView) this.findViewById(R.id.main_textview_countdown);
+
         /* Video surface for camera */
         surfaceView = (SurfaceView) this.findViewById(R.id.main_surface_video);
         SurfaceHolder sh = surfaceView.getHolder();
         sh.addCallback(this);
 
         /* Start with disabled buttons, until the pipeline in native code is initialized. */
-        enableButton(false);
+//        enableButton(false);
 
         initialized = true;
     }
@@ -350,17 +370,17 @@ public class NNStreamerActivity extends Activity implements
     /**
      * Enable (or disable) buttons to launch model.
      */
-    public void enableButton(boolean enabled) {
-        buttonPlay.setEnabled(enabled);
-        buttonStop.setEnabled(enabled);
-    }
+//    public void enableButton(boolean enabled) {
+//        buttonPlay.setEnabled(enabled);
+//        buttonStop.setEnabled(enabled);
+//    }
 
     /**
      * Start pipeline and update UI.
      */
     private void startPipeline(int newId) {
         pipelineId = newId;
-        enableButton(false);
+//        enableButton(false);
 
         /* Pause current pipeline and start new pipeline */
         nativePause();
