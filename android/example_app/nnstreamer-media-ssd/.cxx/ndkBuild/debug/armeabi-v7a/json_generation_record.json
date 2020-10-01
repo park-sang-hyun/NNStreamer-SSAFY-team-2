@@ -2,19 +2,19 @@
   {
     "level": "INFO",
     "message": "Start JSON generation. Platform version: 24 min SDK version: armeabi-v7a",
-    "file": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-media-ssd/jni/Android.mk",
+    "file": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-media-ssd/jni/Android.mk",
     "tag": "debug|armeabi-v7a"
   },
   {
     "level": "INFO",
-    "message": "JSON \u0027/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-media-ssd/.cxx/ndkBuild/debug/armeabi-v7a/android_gradle_build.json\u0027 was up-to-date",
-    "file": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-media-ssd/jni/Android.mk",
+    "message": "JSON \u0027/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-media-ssd/.cxx/ndkBuild/debug/armeabi-v7a/android_gradle_build.json\u0027 was up-to-date",
+    "file": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-media-ssd/jni/Android.mk",
     "tag": "debug|armeabi-v7a"
   },
   {
     "level": "INFO",
     "message": "JSON generation completed without problems",
-    "file": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-media-ssd/jni/Android.mk",
+    "file": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-media-ssd/jni/Android.mk",
     "tag": "debug|armeabi-v7a"
   }
 ]

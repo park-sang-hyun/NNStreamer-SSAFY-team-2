@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ms/values-ms.xml",
+            "outputFile": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/build/intermediates/incremental/mergeDebugResources/merged.dir/values-ms/values-ms.xml",
             "map": [
                 {
                     "source": "/home/ssafy/.gradle/caches/transforms-2/files-2.1/02a0b5591867b269bf90099dda756d74/appcompat-v7-28.0.0/res/values-ms/values-ms.xml",

@@ -101,6 +101,7 @@
       "project": {
         "compilerSettingsCacheFolder": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/.cxx",
         "cxxFolder": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/.cxx",
+        "ideBuildTargetAbi": "arm64-v8a,armeabi-v7a,armeabi",
         "isBuildOnlyTargetAbiEnabled": true,
         "isCmakeBuildCohabitationEnabled": false,
         "isNativeCompilerSettingsCacheEnabled": false,
@@ -124,7 +125,6 @@
     "objFolder": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/build/intermediates/ndkBuild/debug/obj/local",
     "variantName": "debug",
     "validAbiList": [
-      "ARMEABI_V7A",
       "ARM64_V8A"
     ],
     "prefabDirectory": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/.cxx/ndkBuild/debug/prefab",

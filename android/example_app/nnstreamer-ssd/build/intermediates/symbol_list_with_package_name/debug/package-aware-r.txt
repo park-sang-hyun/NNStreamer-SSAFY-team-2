@@ -11,6 +11,7 @@ anim abc_slide_out_bottom
 anim abc_slide_out_top
 anim abc_tooltip_enter
 anim abc_tooltip_exit
+array object_array
 attr actionBarDivider
 attr actionBarItemBackground
 attr actionBarPopupTheme
@@ -889,10 +890,13 @@ id line3
 id linear
 id listMode
 id list_item
+id main_button_capture
+id main_button_gallery
 id main_button_play
 id main_button_setting
 id main_button_stop
 id main_surface_video
+id main_textview_conditions
 id message
 id middle
 id motion_base
@@ -912,6 +916,7 @@ id pathRelative
 id percent
 id position
 id postLayout
+id preview_imageview
 id progress_circular
 id progress_horizontal
 id radio
@@ -937,7 +942,11 @@ id search_plate
 id search_src_text
 id search_voice_btn
 id select_dialog_listview
-id setting_button_test
+id setting_button_add
+id setting_button_reset
+id setting_editText_Number
+id setting_spinner
+id setting_textView_ConditionList
 id shortcut
 id showCustom
 id showHome
@@ -1020,6 +1029,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_loading
+layout activity_preview
 layout activity_setting
 layout main
 layout notification_action

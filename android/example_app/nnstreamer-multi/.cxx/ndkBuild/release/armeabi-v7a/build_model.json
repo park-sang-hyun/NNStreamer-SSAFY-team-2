@@ -4,14 +4,14 @@
   "buildSettings": {
     "environmentVariables": []
   },
-  "cxxBuildFolder": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-multi/.cxx/ndkBuild/release/armeabi-v7a",
+  "cxxBuildFolder": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-multi/.cxx/ndkBuild/release/armeabi-v7a",
   "info": {
     "abi": "ARMEABI_V7A",
     "bitness": 32,
     "deprecated": false,
     "default": true
   },
-  "originalCxxBuildFolder": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-multi/.cxx/ndkBuild/release/armeabi-v7a",
+  "originalCxxBuildFolder": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-multi/.cxx/ndkBuild/release/armeabi-v7a",
   "variant": {
     "buildSystemArgumentList": [
       "NDK_APPLICATION_MK\u003djni/Application.mk",
@@ -29,12 +29,12 @@
     "module": {
       "buildSystem": "NDK_BUILD",
       "cmakeToolchainFile": "/home/ssafy/Android/tools/sdk/ndk/21.3.6528147/build/cmake/android.toolchain.cmake",
-      "cxxFolder": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-multi/.cxx",
+      "cxxFolder": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-multi/.cxx",
       "gradleModulePathName": ":nnstreamer-multi",
-      "intermediatesFolder": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-multi/build/intermediates",
-      "makeFile": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-multi/jni/Android.mk",
-      "moduleBuildFile": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-multi/build.gradle",
-      "moduleRootFolder": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-multi",
+      "intermediatesFolder": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-multi/build/intermediates",
+      "makeFile": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-multi/jni/Android.mk",
+      "moduleBuildFile": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-multi/build.gradle",
+      "moduleRootFolder": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-multi",
       "ndkDefaultAbiList": [
         "ARMEABI_V7A",
         "ARM64_V8A",
@@ -99,12 +99,12 @@
       "ndkDefaultStl": "SYSTEM",
       "ndkVersion": "21.3.6528147",
       "project": {
-        "compilerSettingsCacheFolder": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/.cxx",
-        "cxxFolder": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/.cxx",
+        "compilerSettingsCacheFolder": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/.cxx",
+        "cxxFolder": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/.cxx",
         "isBuildOnlyTargetAbiEnabled": true,
         "isCmakeBuildCohabitationEnabled": false,
         "isNativeCompilerSettingsCacheEnabled": false,
-        "rootBuildGradleFolder": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app",
+        "rootBuildGradleFolder": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app",
         "sdkFolder": "/home/ssafy/Android/tools/sdk",
         "isPrefabEnabled": false
       },
@@ -121,14 +121,14 @@
         "SYSTEM": {}
       }
     },
-    "objFolder": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-multi/build/intermediates/ndkBuild/release/obj/local",
+    "objFolder": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-multi/build/intermediates/ndkBuild/release/obj/local",
     "variantName": "release",
     "validAbiList": [
       "ARMEABI_V7A",
       "ARM64_V8A"
     ],
-    "prefabDirectory": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-multi/.cxx/ndkBuild/release/prefab",
+    "prefabDirectory": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-multi/.cxx/ndkBuild/release/prefab",
     "prefabPackageDirectoryList": []
   },
-  "prefabFolder": "/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-multi/.cxx/ndkBuild/release/prefab/armeabi-v7a"
+  "prefabFolder": "/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-multi/.cxx/ndkBuild/release/prefab/armeabi-v7a"
 }

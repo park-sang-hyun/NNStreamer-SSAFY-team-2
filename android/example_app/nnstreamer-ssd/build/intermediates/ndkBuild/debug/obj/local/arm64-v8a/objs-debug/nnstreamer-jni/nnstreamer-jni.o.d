@@ -1,5 +1,5 @@
-/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/build/intermediates/ndkBuild/debug/obj/local/arm64-v8a/objs-debug/nnstreamer-jni/nnstreamer-jni.o: \
-  /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/jni/nnstreamer-jni.c \
+/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/build/intermediates/ndkBuild/debug/obj/local/arm64-v8a/objs-debug/nnstreamer-jni/nnstreamer-jni.o: \
+  /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/jni/nnstreamer-jni.c \
   /home/ssafy/Android/tools/sdk/ndk/21.3.6528147/sources/cxx-stl/llvm-libc++/include/string.h \
   /home/ssafy/Android/tools/sdk/ndk/21.3.6528147/sources/cxx-stl/llvm-libc++/include/__config \
   /home/ssafy/Android/tools/sdk/ndk/21.3.6528147/sources/cxx-stl/llvm-libc++/include/stdint.h \
@@ -218,7 +218,7 @@
   /home/ssafy/Android/gstreamer-1.0/arm64/include/gstreamer-1.0/gst/video/videooverlay.h \
   /home/ssafy/Android/gstreamer-1.0/arm64/include/gstreamer-1.0/gst/video/gstvideoaffinetransformationmeta.h \
   /home/ssafy/Android/gstreamer-1.0/arm64/include/gstreamer-1.0/gst/video/video-anc.h \
-  /home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/jni/nnstreamer-jni.h
+  /home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/jni/nnstreamer-jni.h
 
 /home/ssafy/Android/tools/sdk/ndk/21.3.6528147/sources/cxx-stl/llvm-libc++/include/string.h:
 
@@ -656,4 +656,4 @@
 
 /home/ssafy/Android/gstreamer-1.0/arm64/include/gstreamer-1.0/gst/video/video-anc.h:
 
-/home/ssafy/Android/workspace/nnstreamer-example/android/example_app/nnstreamer-ssd/jni/nnstreamer-jni.h:
+/home/ssafy/sr/NNStreamer-SSAFY-team-2/android/example_app/nnstreamer-ssd/jni/nnstreamer-jni.h:

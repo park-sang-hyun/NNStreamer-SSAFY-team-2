@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="object_array">
+        <item>사람</item>
+        <item>노트북</item>
+    </string-array>
+
+</resources>
