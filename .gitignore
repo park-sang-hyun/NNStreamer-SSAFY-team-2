@@ -53,3 +53,11 @@ build/
 *.su
 *.idb
 *.pdb
+
+
+# Custom
+*.bin
+*.lock
+*.iml
+*.stdout.txt
+*.gradle
