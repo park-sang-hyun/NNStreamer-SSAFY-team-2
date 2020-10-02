@@ -6,6 +6,7 @@
  *        Users can customize the condition of taking a photo.
  * @author	Jaeyun Jung <jy1210.jung@samsung.com>
  * @author  Yeonuk Jeong <dusdnrl1@naver.com>
+ * @author  Sanghyun Park <park03851@naver.com>
  * @bug		No known bugs
  *
  * Before running this example, model and labels should be in an internal storage of Android device.
@@ -406,6 +407,29 @@ ssd_get_detected_objects(ssd_object_s *objects)
 }
 
 /**
+ * @brief Compare detected objects with conditions.
+ */
+static bool
+ssd_matching_detect_and_condition(){
+    bool check = true;
+
+    if(setting_object_list.empty() || detected_object_list.empty()) return false;
+
+
+    for(auto i = setting_object_list.begin(); i != setting_object_list.end(); ++i){
+        gchararray label = i->first;
+        gint count = i->second;
+
+        if(detected_object_list.find(label) == detected_object_list.end() || detected_object_list[label] != count){
+            check = false;
+            break;
+        }
+    }
+
+    return check;
+}
+
+/**
  * @brief Draw detected object.
  */
 static void
@@ -459,42 +483,25 @@ ssd_draw_object(cairo_t *cr, ssd_object_s *objects, const gint size)
       cairo_stroke(cr);
       cairo_fill_preserve(cr);
 
-      if(detected_object_list.find(label) != detected_object_list.end())
-      {
+        /* Remember the objects that are detected */
+      if(detected_object_list.find(label) != detected_object_list.end()){
         detected_object_list[label]++;
       }
-      else
-      {
+      else{
         detected_object_list[label] = 1;
       }
-    }
-    else
-    {
+    }else{
       nns_logd("Failed to get label (class id %d)", objects[i].class_id);
     }
   }
 
-  std::map<gchararray, gint>::iterator iter;
-  gboolean auto_capture_flag = true;
-  for(iter = detected_object_list.begin(); iter != detected_object_list.end(); ++iter)
-  {
-    gchararray label = iter->first;
-    gint count = iter->second;
-    if(setting_object_list.find(label) == setting_object_list.end() || setting_object_list[label] != count || setting_object_list.empty())
-    {
-      auto_capture_flag = false;
-      break;
-    }
-  }
-  if(auto_capture_flag)
-  {
+    /* send true or false values by comparing detected objects with conditions */
+  if(ssd_matching_detect_and_condition()){
     is_auto_capture = true;
-    setting_object_list.clear();
-  }
-  else
-  {
+  }else{
     is_auto_capture = false;
   }
+
   detected_object_list.clear();
 }
 
@@ -696,13 +703,12 @@ nns_ex_insert_line_and_label(void)
 }
 
 extern "C" void
-nns_ex_register_settings(SettingData * datas, gint len)
-{
-    for(int i = 0; i < len; ++i)
-    {
-        if(setting_object_list.find(datas[i].name) == setting_object_list.end())
-        {
-            setting_object_list[datas[i].name] = datas[i].count;
+nns_ex_register_settings(SettingData * datas, gint len){
+    if(!setting_object_list.empty()) setting_object_list.clear();
+
+    for(int i = 0; i < len; ++i){
+        if(setting_object_list.find((gchararray)datas[i].name) == setting_object_list.end()){
+            setting_object_list[(gchararray)datas[i].name] = datas[i].count;
         }
     }
 }
@@ -712,3 +718,4 @@ nns_ex_get_auto_capture(void)
 {
   return is_auto_capture;
 }
+
