@@ -60,4 +60,6 @@ build/
 *.lock
 *.iml
 *.stdout.txt
-*.gradle
+.gradle/
+.idea/
+.cxx/
