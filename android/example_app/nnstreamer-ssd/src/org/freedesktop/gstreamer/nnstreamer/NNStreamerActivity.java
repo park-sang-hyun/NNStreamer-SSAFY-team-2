@@ -39,6 +39,27 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+class Conditions{
+    String name;
+    int count;
+
+    Conditions() {};
+
+    void setName(String _name){
+        this.name = _name;
+    }
+    String getName(){
+        return this.name;
+    }
+
+    void setCount(int _count){
+        this.count = _count;
+    }
+    int getCount(){
+        return this.count;
+    }
+}
+
 public class NNStreamerActivity extends Activity implements
         SurfaceHolder.Callback,
         View.OnClickListener, PixelCopy.OnPixelCopyFinishedListener {
@@ -58,6 +79,10 @@ public class NNStreamerActivity extends Activity implements
     private native void nativeSurfaceFinalize();
     private native String nativeGetName(int id, int option);
     private native String nativeGetDescription(int id, int option);
+    private native void nativeDeleteLineAndLabel();
+    private native void nativeInsertLineAndLabel();
+    private native void nativeGetCondition(Object[] conditions);
+    private native boolean nativeGetAutoCapture();
     private long native_custom_data;      /* Native code will use this to keep private data */
 
     private int pipelineId = 0;
@@ -237,7 +262,7 @@ public class NNStreamerActivity extends Activity implements
             startActivity(pickerIntent);
             break;
         case R.id.main_button_capture:
-
+            nativeDeleteLineAndLabel();
             CountDownTimer countDownTimer = new CountDownTimer(3000, 1000) {
                 public void onTick(long millisUntilFinished) {
                     textViewCountDown.setText(String.format(Locale.getDefault(), "%d", millisUntilFinished / 1000L));
@@ -252,6 +277,7 @@ public class NNStreamerActivity extends Activity implements
                 @Override
                 public void run()
                 {
+
                     nativePause();
                     Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
                             surfaceView.getHeight(), Bitmap.Config.ARGB_8888);;
@@ -263,6 +289,7 @@ public class NNStreamerActivity extends Activity implements
                     Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
                     previewIntent.putExtra("photo", byteArray);
                     startActivity(previewIntent);
+                    nativeInsertLineAndLabel();
                 }
             }, 3000);
 
@@ -277,6 +304,15 @@ public class NNStreamerActivity extends Activity implements
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 200 && resultCode == RESULT_OK){
             String conditionList = data.getStringExtra("conditionList");
+            String[] conditionString = conditionList.split("\n");
+            Conditions[] conditions = new Conditions[conditionString.length];
+            for(int i = 0; i < conditionString.length; ++i) {
+                String[] condi = conditionString[i].split(" : ");
+                conditions[i] = new Conditions();
+                conditions[i].setName(condi[0]);
+                conditions[i].setCount(Integer.parseInt(condi[1]));
+            }
+            nativeGetCondition(conditions);
             textViewConditionList.setText(conditionList);
         }
     }
