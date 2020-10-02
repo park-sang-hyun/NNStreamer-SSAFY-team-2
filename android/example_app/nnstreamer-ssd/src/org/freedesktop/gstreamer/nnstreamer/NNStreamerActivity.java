@@ -304,6 +304,8 @@ public class NNStreamerActivity extends Activity implements
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 200 && resultCode == RESULT_OK){
             String conditionList = data.getStringExtra("conditionList");
+            String conditionDisplay = ""; // to show conditionList on screen
+
             String[] conditionString = conditionList.split("\n");
             Conditions[] conditions = new Conditions[conditionString.length];
             for(int i = 0; i < conditionString.length; ++i) {
@@ -311,9 +313,12 @@ public class NNStreamerActivity extends Activity implements
                 conditions[i] = new Conditions();
                 conditions[i].setName(condi[0]);
                 conditions[i].setCount(Integer.parseInt(condi[1]));
+		
+		conditionDisplay += conditionString[i] + "  "; // to show conditionList on screen
             }
             nativeGetCondition(conditions);
-            textViewConditionList.setText(conditionList);
+            // textViewConditionList.setText(conditionList);
+	    textViewConditionList.setText(conditionDisplay);
         }
     }
 
