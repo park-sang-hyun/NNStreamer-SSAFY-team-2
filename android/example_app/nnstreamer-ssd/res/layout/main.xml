@@ -4,21 +4,17 @@
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:background="#fff">
+    android:background="#191818">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="3">
-
         <TextView
             android:id="@+id/main_textview_conditions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="">
-
         </TextView>
-
-
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,90 +23,63 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-        <org.freedesktop.gstreamer.GStreamerSurfaceView
-            android:id="@+id/main_surface_video"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
-
-        <TextView
-            android:id="@+id/main_textview_countdown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:textColor="#000"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"></TextView>
-        </RelativeLayout>
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2.3"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:id="@+id/main_button_gallery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="To Gallery"
-                    android:layout_centerInParent="true"/>
-
-            </RelativeLayout>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:id="@+id/main_button_capture"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="capture"
-                    android:layout_centerInParent="true">
-
-                </Button>
-
-
-            </RelativeLayout>
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/main_button_setting"
+            <org.freedesktop.gstreamer.GStreamerSurfaceView
+                android:id="@+id/main_surface_video"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Setting Button"
-                android:layout_centerInParent="true"/>
-
-            </RelativeLayout>
-        </LinearLayout>
+                android:layout_centerInParent="true" />
+            <TextView
+                android:id="@+id/main_textview_countdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:textColor="#445BDD"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true">
+            </TextView>
+        </RelativeLayout>
     </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2.3">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <ImageButton android:id="@+id/main_button_gallery"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/gallery_btn">
+            </ImageButton>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
-
+            <ImageButton android:id="@+id/main_button_capture"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/capture_btn">
+            </ImageButton>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <ImageButton android:id="@+id/main_button_setting"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/settings_btn">
+            </ImageButton>
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>
+
+
