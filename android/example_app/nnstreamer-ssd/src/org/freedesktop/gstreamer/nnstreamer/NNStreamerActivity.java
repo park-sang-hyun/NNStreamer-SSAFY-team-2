@@ -70,9 +70,9 @@ public class NNStreamerActivity extends Activity implements
     private ImageButton buttonPlay;
     private ImageButton buttonStop;
 
-    private Button buttonSetting;
-    private Button buttonGallery;
-    private Button buttonCapture;
+    private ImageButton buttonSetting;
+    private ImageButton buttonGallery;
+    private ImageButton buttonCapture;
 
     private SurfaceView surfaceView;
 
@@ -343,13 +343,13 @@ public class NNStreamerActivity extends Activity implements
 //        buttonStop = (ImageButton) this.findViewById(R.id.main_button_stop);
 //        buttonStop.setOnClickListener(this);
 
-        buttonSetting = (Button) this.findViewById(R.id.main_button_setting);
+        buttonSetting = (ImageButton) this.findViewById(R.id.main_button_setting);
         buttonSetting.setOnClickListener(this);
 
-        buttonGallery = (Button) this.findViewById(R.id.main_button_gallery);
+        buttonGallery = (ImageButton) this.findViewById(R.id.main_button_gallery);
         buttonGallery.setOnClickListener(this);
 
-        buttonCapture = (Button) this.findViewById(R.id.main_button_capture);
+        buttonCapture = (ImageButton) this.findViewById(R.id.main_button_capture);
         buttonCapture.setOnClickListener(this);
 
         textViewConditionList = (TextView) this.findViewById(R.id.main_textview_conditions);
