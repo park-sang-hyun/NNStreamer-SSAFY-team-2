@@ -7,10 +7,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Camera;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
@@ -37,6 +39,7 @@ import org.freedesktop.gstreamer.GStreamerSurfaceView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -97,9 +100,6 @@ public class NNStreamerActivity extends Activity implements
     private DownloadModel downloadTask = null;
     private ArrayList<String> downloadList = new ArrayList<>();
 
-    private ImageButton buttonPlay;
-    private ImageButton buttonStop;
-
     private ImageButton buttonSetting;
     private ImageButton buttonGallery;
     private ImageButton buttonCapture;
@@ -111,6 +111,7 @@ public class NNStreamerActivity extends Activity implements
 
     private Boolean captureMode = false;
     private Boolean checkFlag = false;
+
 
     private static final int CAMERA_REQUEST = 1888;
 
@@ -207,10 +208,6 @@ public class NNStreamerActivity extends Activity implements
     }
 
     static {
-        /* Update UI (buttons and other components) */
-//                buttonPlay.setVisibility(View.GONE);
-//                buttonStop.setVisibility(View.VISIBLE);
-//                enableButton(true);
         System.loadLibrary("gstreamer_android");
         System.loadLibrary("nnstreamer-jni");
         nativeClassInit();
@@ -245,16 +242,6 @@ public class NNStreamerActivity extends Activity implements
         }
 
         switch (viewId) {
-//        case R.id.main_button_play:
-//            nativePlay();
-//            buttonPlay.setVisibility(View.GONE);
-//            buttonStop.setVisibility(View.VISIBLE);
-//            break;
-//        case R.id.main_button_stop:
-//            nativePause();
-//            buttonPlay.setVisibility(View.VISIBLE);
-//            buttonStop.setVisibility(View.GONE);
-//            break;
         case R.id.main_button_setting:
             Intent intent_setting = new Intent(NNStreamerActivity.this, SettingActivity.class);
             startActivityForResult(intent_setting, 200);
@@ -265,11 +252,11 @@ public class NNStreamerActivity extends Activity implements
             pickerIntent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
             pickerIntent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-//            startActivityForResult(pickerIntent,100);
-            startActivity(pickerIntent);
+            startActivityForResult(pickerIntent,100);
             break;
         case R.id.main_button_capture:
             nativeDeleteLineAndLabel();
+            Log.d(TAG, "captureMode : "+captureMode);
             if(captureMode){
                 Thread checkCapture = new Thread(new Runnable() {
                     @Override
@@ -283,10 +270,9 @@ public class NNStreamerActivity extends Activity implements
                             SimpleDateFormat sdfNow = new SimpleDateFormat("HHmmss");
                             String formatDate = sdfNow.format(date);
                             int now = Integer.parseInt(formatDate);
-                            boolean flag = nativeGetAutoCapture();
-                            Log.d(TAG, "flag :" + flag);
-                            Log.d(TAG, "queue size :" + queue.size());
-                            if(flag){
+
+                            Log.d(TAG, "In Thread : " + now + " , " + queue.size());
+                            if(nativeGetAutoCapture()){
                                 queue.add(now);
                             }
                             if(!queue.isEmpty()) {
@@ -303,35 +289,36 @@ public class NNStreamerActivity extends Activity implements
                                 }
                             }
                         }
-//                        CountDownTimer countDownTimer = new CountDownTimer(3000, 1000) {
-//                            public void onTick(long millisUntilFinished) {
-//                                textViewCountDown.setText(String.format(Locale.getDefault(), "%d", millisUntilFinished / 1000L));
-//                            }
-//
-//                            public void onFinish() {
-//                                textViewCountDown.setText("Done.");
-//                            }
-//                        }.start();
-//                        new Handler().postDelayed(new Runnable()
-//                        {
-//                            @Override
-//                            public void run()
-//                            {
 
-//                                nativePause();
-//                                Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
-//                                        surfaceView.getHeight(), Bitmap.Config.ARGB_8888);;
-//                                PixelCopy.request(surfaceView,bitmap,NNStreamerActivity.this,new Handler());
-//                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//                                bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
-//                                byte[] byteArray = stream.toByteArray();
-//
-//                                Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
-//                                previewIntent.putExtra("photo", byteArray);
-//                                startActivity(previewIntent);
-//                                nativeInsertLineAndLabel();
-//                            }
-//                        }, 3000);
+                        CountDownTimer countDownTimer = new CountDownTimer(3000, 1000) {
+                            public void onTick(long millisUntilFinished) {
+                                textViewCountDown.setText(String.format(Locale.getDefault(), "%d", millisUntilFinished / 1000L));
+                            }
+
+                            public void onFinish() {
+                                textViewCountDown.setText("Done.");
+                            }
+                        }.start();
+                        new Handler().postDelayed(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+
+                                nativePause();
+                                Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
+                                        surfaceView.getHeight(), Bitmap.Config.ARGB_8888);;
+                                PixelCopy.request(surfaceView,bitmap,NNStreamerActivity.this,new Handler());
+                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                                bitmap.compress(Bitmap.CompressFormat.JPEG,50,stream);
+                                byte[] byteArray = stream.toByteArray();
+
+                                Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
+                                previewIntent.putExtra("photo", byteArray);
+                                startActivity(previewIntent);
+                                nativeInsertLineAndLabel();
+                            }
+                        }, 3000);
                     }
                 });
 
@@ -398,8 +385,32 @@ public class NNStreamerActivity extends Activity implements
 		conditionDisplay += conditionString[i] + "  "; // to show conditionList on screen
             }
             nativeGetCondition(conditions);
-            // textViewConditionList.setText(conditionList);
 	    textViewConditionList.setText(conditionDisplay);
+        }else if(requestCode == 100){
+            if(resultCode == RESULT_OK && data != null)
+            {
+                try{
+                    InputStream in = getContentResolver().openInputStream(data.getData());
+
+                    Bitmap img = BitmapFactory.decodeStream(in);
+                    in.close();
+
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    img.compress(Bitmap.CompressFormat.JPEG,50,stream);
+                    byte[] byteArray = stream.toByteArray();
+
+                    Intent selectedImageIntent = new Intent(NNStreamerActivity.this, SelectedImageActivity.class);
+                    selectedImageIntent.putExtra("photo", byteArray);
+                    startActivity(selectedImageIntent);
+                }catch(Exception e)
+                {
+
+                }
+            }
+            else if(resultCode == RESULT_CANCELED)
+            {
+                Toast.makeText(this, "사진 선택 취소", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -471,12 +482,6 @@ public class NNStreamerActivity extends Activity implements
 
         setContentView(R.layout.main);
 
-//        buttonPlay = (ImageButton) this.findViewById(R.id.main_button_play);
-//        buttonPlay.setOnClickListener(this);
-//
-//        buttonStop = (ImageButton) this.findViewById(R.id.main_button_stop);
-//        buttonStop.setOnClickListener(this);
-
         buttonSetting = (ImageButton) this.findViewById(R.id.main_button_setting);
         buttonSetting.setOnClickListener(this);
 
@@ -500,14 +505,6 @@ public class NNStreamerActivity extends Activity implements
 
         initialized = true;
     }
-
-    /**
-     * Enable (or disable) buttons to launch model.
-     */
-//    public void enableButton(boolean enabled) {
-//        buttonPlay.setEnabled(enabled);
-//        buttonStop.setEnabled(enabled);
-//    }
 
     /**
      * Start pipeline and update UI.

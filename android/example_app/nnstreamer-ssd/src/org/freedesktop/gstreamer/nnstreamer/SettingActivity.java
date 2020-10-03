@@ -86,9 +86,11 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
                 break;
             case R.id.setting_button_settingComplete:
                 String data = textViewConditionList.getText().toString();
-                Intent intent = new Intent();//startActivity()를 할것이 아니므로 그냥 빈 인텐트로 만듦
-                intent.putExtra("conditionList",data);
-                setResult(RESULT_OK,intent);
+                if (!data.equals("")){
+                    Intent intent = new Intent();
+                    intent.putExtra("conditionList",data);
+                    setResult(RESULT_OK,intent);
+                }
                 finish();
                 break;
             case R.id.setting_button_deleteList:
