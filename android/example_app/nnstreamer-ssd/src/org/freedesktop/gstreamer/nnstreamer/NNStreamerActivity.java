@@ -289,36 +289,7 @@ public class NNStreamerActivity extends Activity implements
                                 }
                             }
                         }
-
-                        CountDownTimer countDownTimer = new CountDownTimer(3000, 1000) {
-                            public void onTick(long millisUntilFinished) {
-                                textViewCountDown.setText(String.format(Locale.getDefault(), "%d", millisUntilFinished / 1000L));
-                            }
-
-                            public void onFinish() {
-                                textViewCountDown.setText("Done.");
-                            }
-                        }.start();
-                        new Handler().postDelayed(new Runnable()
-                        {
-                            @Override
-                            public void run()
-                            {
-
-                                nativePause();
-                                Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
-                                        surfaceView.getHeight(), Bitmap.Config.ARGB_8888);;
-                                PixelCopy.request(surfaceView,bitmap,NNStreamerActivity.this,new Handler());
-                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                                bitmap.compress(Bitmap.CompressFormat.JPEG,50,stream);
-                                byte[] byteArray = stream.toByteArray();
-
-                                Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
-                                previewIntent.putExtra("photo", byteArray);
-                                startActivity(previewIntent);
-                                nativeInsertLineAndLabel();
-                            }
-                        }, 3000);
+                        
                     }
                 });
 
