@@ -597,9 +597,9 @@ nns_ex_launch_pipeline(GstElement **pipeline, const gint option)
 
   launch_option = option;
 
-  str_pipeline = g_strdup_printf("ahc2src ! videoconvert ! video/x-raw,format=RGB,width=640,height=480,framerate=30/1 ! tee name=traw "
-                                 "traw. ! queue ! videoconvert ! cairooverlay name=res_cairooverlay ! glimagesink "
-                                 "traw. ! queue leaky=2 max-size-buffers=2 ! videoscale ! video/x-raw,format=RGB,width=%d,height=%d ! tensor_converter ! "
+ str_pipeline = g_strdup_printf("ahc2src ! videoconvert ! video/x-raw,format=RGB,width=640,height=480,framerate=30/1 ! tee name=traw "
+                                 "traw. ! queue ! videoflip method=clockwise ! videoconvert ! cairooverlay name=res_cairooverlay ! glimagesink "
+                                 "traw. ! queue leaky=2 max-size-buffers=2 ! videoflip method=clockwise ! videoscale ! video/x-raw,format=RGB,width=%d,height=%d ! tensor_converter ! "
                                  "tensor_transform mode=arithmetic option=typecast:float32,add:-127.5,div:127.5 ! "
                                  "tensor_filter framework=tensorflow-lite model=%s ! tensor_sink name=res_obj",
                                  SSD_MODEL_WIDTH, SSD_MODEL_HEIGHT, EX_OBJ_MODEL);
