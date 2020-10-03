@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -29,15 +30,19 @@ import android.widget.Toast;
 
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.widget.ToggleButton;
 
 import org.freedesktop.gstreamer.GStreamer;
 import org.freedesktop.gstreamer.GStreamerSurfaceView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Locale;
+import java.util.Queue;
 
 class Conditions{
     String name;
@@ -104,15 +109,14 @@ public class NNStreamerActivity extends Activity implements
     private TextView textViewConditionList;
     private TextView textViewCountDown;
 
+    private Boolean captureMode = false;
+    private Boolean checkFlag = false;
+
     private static final int CAMERA_REQUEST = 1888;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        /* LaodingActivity */
-//        Intent intent = new Intent(this, LoadingActivity.class);
-//        startActivity(intent);
 
         /* Check permissions */
         if (!checkPermission(Manifest.permission.CAMERA) ||
@@ -132,6 +136,7 @@ public class NNStreamerActivity extends Activity implements
         }
 
         initActivity();
+        nativeDeleteLineAndLabel();
     }
 
     @Override
@@ -154,6 +159,9 @@ public class NNStreamerActivity extends Activity implements
                 startPipeline(PIPELINE_ID);
             }
         }
+
+        textViewCountDown.setText("");
+        if(!captureMode) nativeDeleteLineAndLabel();
     }
 
     @Override
@@ -194,16 +202,15 @@ public class NNStreamerActivity extends Activity implements
                 }
 
                 nativePlay();
-
-                /* Update UI (buttons and other components) */
-//                buttonPlay.setVisibility(View.GONE);
-//                buttonStop.setVisibility(View.VISIBLE);
-//                enableButton(true);
             }
         });
     }
 
     static {
+        /* Update UI (buttons and other components) */
+//                buttonPlay.setVisibility(View.GONE);
+//                buttonStop.setVisibility(View.VISIBLE);
+//                enableButton(true);
         System.loadLibrary("gstreamer_android");
         System.loadLibrary("nnstreamer-jni");
         nativeClassInit();
@@ -263,36 +270,110 @@ public class NNStreamerActivity extends Activity implements
             break;
         case R.id.main_button_capture:
             nativeDeleteLineAndLabel();
-            CountDownTimer countDownTimer = new CountDownTimer(3000, 1000) {
-                public void onTick(long millisUntilFinished) {
-                    textViewCountDown.setText(String.format(Locale.getDefault(), "%d", millisUntilFinished / 1000L));
-                }
+            if(captureMode){
+                Thread checkCapture = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // TODO Auto-generated method stub
+                        Queue<Integer> queue = new LinkedList<>();
+                        while(true){
+                            if(!captureMode) return;
 
-                public void onFinish() {
-                    textViewCountDown.setText("Done.");
-                }
-            }.start();
-            new Handler().postDelayed(new Runnable()
-            {
-                @Override
-                public void run()
-                {
+                            Date date = new Date(System.currentTimeMillis());
+                            SimpleDateFormat sdfNow = new SimpleDateFormat("HHmmss");
+                            String formatDate = sdfNow.format(date);
+                            int now = Integer.parseInt(formatDate);
+                            boolean flag = nativeGetAutoCapture();
+                            Log.d(TAG, "flag :" + flag);
+                            Log.d(TAG, "queue size :" + queue.size());
+                            if(flag){
+                                queue.add(now);
+                            }
+                            if(!queue.isEmpty()) {
+                                int head = queue.peek();
+                                if (Math.abs(now - head) > 5) {
+                                    Log.d(TAG, "now poll :" + now);
+                                    Log.d(TAG, "head poll:" + head);
+                                    Log.d(TAG, "now-head :" + Math.abs(now - head));
+                                    queue.poll();
+                                }
+                                if (queue.size() > 10) {
+                                    checkFlag = true;
+                                    break;
+                                }
+                            }
+                        }
+//                        CountDownTimer countDownTimer = new CountDownTimer(3000, 1000) {
+//                            public void onTick(long millisUntilFinished) {
+//                                textViewCountDown.setText(String.format(Locale.getDefault(), "%d", millisUntilFinished / 1000L));
+//                            }
+//
+//                            public void onFinish() {
+//                                textViewCountDown.setText("Done.");
+//                            }
+//                        }.start();
+//                        new Handler().postDelayed(new Runnable()
+//                        {
+//                            @Override
+//                            public void run()
+//                            {
 
-                    nativePause();
-                    Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
-                            surfaceView.getHeight(), Bitmap.Config.ARGB_8888);;
-                    PixelCopy.request(surfaceView,bitmap,NNStreamerActivity.this,new Handler());
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
-                    byte[] byteArray = stream.toByteArray();
+//                                nativePause();
+//                                Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
+//                                        surfaceView.getHeight(), Bitmap.Config.ARGB_8888);;
+//                                PixelCopy.request(surfaceView,bitmap,NNStreamerActivity.this,new Handler());
+//                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                                bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
+//                                byte[] byteArray = stream.toByteArray();
+//
+//                                Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
+//                                previewIntent.putExtra("photo", byteArray);
+//                                startActivity(previewIntent);
+//                                nativeInsertLineAndLabel();
+//                            }
+//                        }, 3000);
+                    }
+                });
 
-                    Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
-                    previewIntent.putExtra("photo", byteArray);
-                    startActivity(previewIntent);
-                    nativeInsertLineAndLabel();
-                }
-            }, 3000);
+                checkCapture.start();
+                Thread take = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while(!checkFlag){
+                            if(!captureMode) return;
+                        }
 
+                            nativePause();
+                            Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
+                                    surfaceView.getHeight(), Bitmap.Config.ARGB_8888);
+                            PixelCopy.request(surfaceView, bitmap, NNStreamerActivity.this, new Handler(Looper.getMainLooper()));
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+                            byte[] byteArray = stream.toByteArray();
+
+                            Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
+                            previewIntent.putExtra("photo", byteArray);
+                            startActivity(previewIntent);
+                            nativeInsertLineAndLabel();
+                            return;
+                    }
+                });
+
+                take.start();
+            }else{
+                nativePause();
+                Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
+                        surfaceView.getHeight(), Bitmap.Config.ARGB_8888);;
+                PixelCopy.request(surfaceView,bitmap,NNStreamerActivity.this,new Handler());
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
+                byte[] byteArray = stream.toByteArray();
+
+                Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
+                previewIntent.putExtra("photo", byteArray);
+                startActivity(previewIntent);
+                nativeInsertLineAndLabel();
+            }
             break;
         default:
             break;
@@ -319,6 +400,18 @@ public class NNStreamerActivity extends Activity implements
             nativeGetCondition(conditions);
             // textViewConditionList.setText(conditionList);
 	    textViewConditionList.setText(conditionDisplay);
+        }
+    }
+
+    public void onToggleClicked(View v){
+        boolean on = ((ToggleButton) v).isChecked();
+
+        if(on){
+            captureMode = true;
+            nativeInsertLineAndLabel();
+        }else{
+            captureMode = false;
+            nativeDeleteLineAndLabel();
         }
     }
 

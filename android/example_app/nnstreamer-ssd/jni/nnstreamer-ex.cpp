@@ -441,8 +441,8 @@ ssd_draw_object(cairo_t *cr, ssd_object_s *objects, const gint size)
   gchar *label;
 
   /* Set clolr */
-  red = 1.0;
-  green = blue = 0.0;
+  red = 0.0;
+  green = blue = 1.0;
 
   for (i = 0; i < size; ++i)
   {
@@ -454,14 +454,7 @@ ssd_draw_object(cairo_t *cr, ssd_object_s *objects, const gint size)
     /* draw rectangle */
     cairo_rectangle(cr, x, y, width, height);
     cairo_set_source_rgb(cr, red, green, blue);
-    if(is_line_title)
-    {
-      cairo_set_line_width(cr, 1.5);
-    }
-    else
-    {
-      cairo_set_line_width(cr, 0);
-    }
+    cairo_set_line_width(cr, 0);
     cairo_stroke(cr);
 
     /* draw title */
@@ -479,7 +472,7 @@ ssd_draw_object(cairo_t *cr, ssd_object_s *objects, const gint size)
       cairo_set_source_rgb(cr, red, green, blue);
       cairo_fill_preserve(cr);
       cairo_set_source_rgb(cr, 1, 1, 1);
-      cairo_set_line_width(cr, .3);
+      cairo_set_line_width(cr, 0);
       cairo_stroke(cr);
       cairo_fill_preserve(cr);
 

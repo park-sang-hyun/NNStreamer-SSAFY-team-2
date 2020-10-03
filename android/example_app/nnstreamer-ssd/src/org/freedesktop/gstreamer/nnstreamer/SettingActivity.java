@@ -73,7 +73,12 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
                 if(selectedObject.length() != 0){
                     String tmp = textViewConditionList.getText().toString();
                     String num = editTextNumber.getText().toString();
-                    textViewConditionList.setText(tmp + selectedObject + " : " + num + "\n");
+                    if(!num.equals("")){
+                        textViewConditionList.setText(tmp + selectedObject + " : " + num + "\n");
+                        editTextNumber.setText("");
+                    }else{
+                        Toast.makeText(this,"You must insert 'Number'", Toast.LENGTH_LONG).show();
+                    }
                 }
                 break;
             case R.id.setting_button_reset:
