@@ -121,23 +121,22 @@ public class NNStreamerActivity extends Activity implements
 
         /* Check permissions */
         if (!checkPermission(Manifest.permission.CAMERA) ||
-            !checkPermission(Manifest.permission.INTERNET) ||
-            !checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ||
-            !checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
-            !checkPermission(Manifest.permission.WAKE_LOCK)) {
+                !checkPermission(Manifest.permission.INTERNET) ||
+                !checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ||
+                !checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
+                !checkPermission(Manifest.permission.WAKE_LOCK)) {
             ActivityCompat.requestPermissions(this,
-                new String[] {
-                    Manifest.permission.CAMERA,
-                    Manifest.permission.INTERNET,
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.WAKE_LOCK
-                }, PERMISSION_REQUEST_ALL);
+                    new String[] {
+                            Manifest.permission.CAMERA,
+                            Manifest.permission.INTERNET,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.WAKE_LOCK
+                    }, PERMISSION_REQUEST_ALL);
             return;
         }
 
         initActivity();
-        nativeDeleteLineAndLabel();
     }
 
     @Override
@@ -162,7 +161,8 @@ public class NNStreamerActivity extends Activity implements
         }
 
         textViewCountDown.setText("");
-        if(!captureMode) nativeDeleteLineAndLabel();
+        if(captureMode) nativeInsertLineAndLabel();
+        else nativeDeleteLineAndLabel();
     }
 
     @Override
@@ -203,6 +203,7 @@ public class NNStreamerActivity extends Activity implements
                 }
 
                 nativePlay();
+
             }
         });
     }
@@ -242,64 +243,90 @@ public class NNStreamerActivity extends Activity implements
         }
 
         switch (viewId) {
-        case R.id.main_button_setting:
-            Intent intent_setting = new Intent(NNStreamerActivity.this, SettingActivity.class);
-            startActivityForResult(intent_setting, 200);
+            case R.id.main_button_setting:
+                Intent intent_setting = new Intent(NNStreamerActivity.this, SettingActivity.class);
+                startActivityForResult(intent_setting, 200);
 
-            break;
-        case R.id.main_button_gallery:
-            Intent pickerIntent = new Intent(Intent.ACTION_PICK);
-            pickerIntent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
-            pickerIntent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                break;
+            case R.id.main_button_gallery:
+                Intent pickerIntent = new Intent(Intent.ACTION_PICK);
+                pickerIntent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+                pickerIntent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-            startActivityForResult(pickerIntent,100);
-            break;
-        case R.id.main_button_capture:
-            nativeDeleteLineAndLabel();
-            Log.d(TAG, "captureMode : "+captureMode);
-            if(captureMode){
-                Thread checkCapture = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // TODO Auto-generated method stub
-                        Queue<Integer> queue = new LinkedList<>();
-                        while(true){
-                            if(!captureMode) return;
+                startActivityForResult(pickerIntent,100);
+                break;
+            case R.id.main_button_capture:
+                nativeDeleteLineAndLabel();
+                Log.d(TAG, "captureMode : "+captureMode);
+                if(captureMode){
+                    Thread checkCapture = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            // TODO Auto-generated method stub
+                            Queue<Integer> queue = new LinkedList<>();
+                            while(true){
+                                if(!captureMode) return;
 
-                            Date date = new Date(System.currentTimeMillis());
-                            SimpleDateFormat sdfNow = new SimpleDateFormat("HHmmss");
-                            String formatDate = sdfNow.format(date);
-                            int now = Integer.parseInt(formatDate);
-
-                            Log.d(TAG, "In Thread : " + now + " , " + queue.size());
-                            if(nativeGetAutoCapture()){
-                                queue.add(now);
-                            }
-                            if(!queue.isEmpty()) {
-                                int head = queue.peek();
-                                if (Math.abs(now - head) > 5) {
-                                    Log.d(TAG, "now poll :" + now);
-                                    Log.d(TAG, "head poll:" + head);
-                                    Log.d(TAG, "now-head :" + Math.abs(now - head));
-                                    queue.poll();
+                                Date date = new Date(System.currentTimeMillis());
+                                SimpleDateFormat sdfNow = new SimpleDateFormat("HHmmss");
+                                String formatDate = sdfNow.format(date);
+                                int now = Integer.parseInt(formatDate);
+                                Log.d(TAG, "In Thread : " + now + " , " + queue.size());
+                                if(nativeGetAutoCapture()){
+                                    queue.add(now);
                                 }
-                                if (queue.size() > 10) {
-                                    checkFlag = true;
-                                    break;
+                                if(!queue.isEmpty()) {
+                                    int head = queue.peek();
+                                    if (Math.abs(now - head) > 10) {
+                                        queue.poll();
+                                    }
+                                    if (queue.size() > 30) {
+                                        checkFlag = true;
+                                        break;
+                                    }
                                 }
                             }
+                            
+//                            CountDownTimer countDownTimer = new CountDownTimer(3000, 1000) {
+//                                public void onTick(long millisUntilFinished) {
+//                                    textViewCountDown.setText(String.format(Locale.getDefault(), "%d", millisUntilFinished / 1000L));
+//                                }
+//
+//                                public void onFinish() {
+//                                    textViewCountDown.setText("Done.");
+//                                }
+//                            }.start();
+//                            new Handler().postDelayed(new Runnable()
+//                            {
+//                                @Override
+//                                public void run()
+//                                {
+//
+//                                    nativePause();
+//                                    Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
+//                                            surfaceView.getHeight(), Bitmap.Config.ARGB_8888);;
+//                                    PixelCopy.request(surfaceView,bitmap,NNStreamerActivity.this,new Handler());
+//                                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                                    bitmap.compress(Bitmap.CompressFormat.JPEG,30,stream);
+//                                    byte[] byteArray = stream.toByteArray();
+//
+//                                    Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
+//                                    previewIntent.putExtra("photo", byteArray);
+//                                    startActivity(previewIntent);
+//                                    nativeInsertLineAndLabel();
+//                                }
+//                            }, 3000);
                         }
-                        
-                    }
-                });
+                    });
 
-                checkCapture.start();
-                Thread take = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        while(!checkFlag){
-                            if(!captureMode) return;
-                        }
+                    checkCapture.start();
+
+                    Thread take = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            while(!checkFlag){
+                                if(!captureMode) return;
+                            }
 
                             nativePause();
                             Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
@@ -314,27 +341,27 @@ public class NNStreamerActivity extends Activity implements
                             startActivity(previewIntent);
                             nativeInsertLineAndLabel();
                             return;
-                    }
-                });
+                        }
+                    });
 
-                take.start();
-            }else{
-                nativePause();
-                Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
-                        surfaceView.getHeight(), Bitmap.Config.ARGB_8888);;
-                PixelCopy.request(surfaceView,bitmap,NNStreamerActivity.this,new Handler());
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
-                byte[] byteArray = stream.toByteArray();
+                    take.start();
+                }else{
+                    nativePause();
+                    Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
+                            surfaceView.getHeight(), Bitmap.Config.ARGB_8888);;
+                    PixelCopy.request(surfaceView,bitmap,NNStreamerActivity.this,new Handler());
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG,30,stream);
+                    byte[] byteArray = stream.toByteArray();
 
-                Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
-                previewIntent.putExtra("photo", byteArray);
-                startActivity(previewIntent);
-                nativeInsertLineAndLabel();
-            }
-            break;
-        default:
-            break;
+                    Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
+                    previewIntent.putExtra("photo", byteArray);
+                    startActivity(previewIntent);
+                    nativeInsertLineAndLabel();
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -352,11 +379,11 @@ public class NNStreamerActivity extends Activity implements
                 conditions[i] = new Conditions();
                 conditions[i].setName(condi[0]);
                 conditions[i].setCount(Integer.parseInt(condi[1]));
-		
-		conditionDisplay += conditionString[i] + "  "; // to show conditionList on screen
+
+                conditionDisplay += conditionString[i] + "  "; // to show conditionList on screen
             }
             nativeGetCondition(conditions);
-	    textViewConditionList.setText(conditionDisplay);
+            textViewConditionList.setText(conditionDisplay);
         }else if(requestCode == 100){
             if(resultCode == RESULT_OK && data != null)
             {
@@ -367,7 +394,7 @@ public class NNStreamerActivity extends Activity implements
                     in.close();
 
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    img.compress(Bitmap.CompressFormat.JPEG,50,stream);
+                    img.compress(Bitmap.CompressFormat.JPEG,30,stream);
                     byte[] byteArray = stream.toByteArray();
 
                     Intent selectedImageIntent = new Intent(NNStreamerActivity.this, SelectedImageActivity.class);
@@ -399,7 +426,7 @@ public class NNStreamerActivity extends Activity implements
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-            String permissions[], int[] grantResults) {
+                                           String permissions[], int[] grantResults) {
         if (requestCode == PERMISSION_REQUEST_ALL) {
             for (int grant : grantResults) {
                 if (grant != PackageManager.PERMISSION_GRANTED) {
