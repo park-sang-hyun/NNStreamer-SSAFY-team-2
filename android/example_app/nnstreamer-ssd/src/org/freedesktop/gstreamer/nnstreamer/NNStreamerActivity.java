@@ -159,6 +159,8 @@ public class NNStreamerActivity extends Activity implements
         }
 
         textViewCountDown.setText("");
+        if(captureMode) nativeInsertLineAndLabel();
+        else nativeDeleteLineAndLabel();
     }
 
     @Override
