@@ -299,7 +299,7 @@ public class NNStreamerActivity extends Activity implements
                                         surfaceView.getHeight(), Bitmap.Config.ARGB_8888);;
                                 PixelCopy.request(surfaceView,bitmap,NNStreamerActivity.this,new Handler());
                                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                                bitmap.compress(Bitmap.CompressFormat.JPEG,50,stream);
+                                bitmap.compress(Bitmap.CompressFormat.JPEG,30,stream);
                                 byte[] byteArray = stream.toByteArray();
 
                                 Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
@@ -321,7 +321,7 @@ public class NNStreamerActivity extends Activity implements
                         surfaceView.getHeight(), Bitmap.Config.ARGB_8888);;
                 PixelCopy.request(surfaceView,bitmap,NNStreamerActivity.this,new Handler());
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
+                bitmap.compress(Bitmap.CompressFormat.JPEG,30,stream);
                 byte[] byteArray = stream.toByteArray();
 
                 Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
@@ -364,7 +364,7 @@ public class NNStreamerActivity extends Activity implements
                     in.close();
 
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    img.compress(Bitmap.CompressFormat.JPEG,50,stream);
+                    img.compress(Bitmap.CompressFormat.JPEG,30,stream);
                     byte[] byteArray = stream.toByteArray();
 
                     Intent selectedImageIntent = new Intent(NNStreamerActivity.this, SelectedImageActivity.class);
