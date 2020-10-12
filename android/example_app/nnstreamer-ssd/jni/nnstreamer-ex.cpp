@@ -699,11 +699,11 @@ extern "C" void
 nns_ex_register_settings(SettingData * datas, gint len){
     if(!setting_object_list.empty()) setting_object_list.clear();
 
-    for(int i = 0; i < len; ++i){
-        if(setting_object_list.find((gchararray)datas[i].name) == setting_object_list.end()){
-            setting_object_list[(gchararray)datas[i].name] = datas[i].count;
-        }
+  for(int i = 0; i < len; ++i){
+    if(setting_object_list.find((gchararray)datas[i].name) == setting_object_list.end()){
+      setting_object_list[(gchararray)datas[i].name] = datas[i].count;
     }
+  }
 }
 
 extern "C" gboolean

@@ -112,6 +112,8 @@ public class NNStreamerActivity extends Activity implements
     private Boolean captureMode = false;
     private Boolean checkFlag = false;
 
+    private  Conditions[] conditions;
+
 
     private static final int CAMERA_REQUEST = 1888;
 
@@ -145,11 +147,13 @@ public class NNStreamerActivity extends Activity implements
 
         stopPipelineTimer();
         nativePause();
+        //setMessage("onPause");
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        //setMessage(initialized + "");
 
         /* Start pipeline */
         if (initialized) {
@@ -163,6 +167,8 @@ public class NNStreamerActivity extends Activity implements
         textViewCountDown.setText("");
         if(captureMode) nativeInsertLineAndLabel();
         else nativeDeleteLineAndLabel();
+
+        if(conditions != null) nativeGetCondition(conditions);
     }
 
     @Override
@@ -286,36 +292,6 @@ public class NNStreamerActivity extends Activity implements
                                     }
                                 }
                             }
-                            
-//                            CountDownTimer countDownTimer = new CountDownTimer(3000, 1000) {
-//                                public void onTick(long millisUntilFinished) {
-//                                    textViewCountDown.setText(String.format(Locale.getDefault(), "%d", millisUntilFinished / 1000L));
-//                                }
-//
-//                                public void onFinish() {
-//                                    textViewCountDown.setText("Done.");
-//                                }
-//                            }.start();
-//                            new Handler().postDelayed(new Runnable()
-//                            {
-//                                @Override
-//                                public void run()
-//                                {
-//
-//                                    nativePause();
-//                                    Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
-//                                            surfaceView.getHeight(), Bitmap.Config.ARGB_8888);;
-//                                    PixelCopy.request(surfaceView,bitmap,NNStreamerActivity.this,new Handler());
-//                                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//                                    bitmap.compress(Bitmap.CompressFormat.JPEG,30,stream);
-//                                    byte[] byteArray = stream.toByteArray();
-//
-//                                    Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
-//                                    previewIntent.putExtra("photo", byteArray);
-//                                    startActivity(previewIntent);
-//                                    nativeInsertLineAndLabel();
-//                                }
-//                            }, 3000);
                         }
                     });
 
@@ -340,6 +316,7 @@ public class NNStreamerActivity extends Activity implements
                             previewIntent.putExtra("photo", byteArray);
                             startActivity(previewIntent);
                             nativeInsertLineAndLabel();
+                            checkFlag = false;
                             return;
                         }
                     });
@@ -373,7 +350,7 @@ public class NNStreamerActivity extends Activity implements
             String conditionDisplay = ""; // to show conditionList on screen
 
             String[] conditionString = conditionList.split("\n");
-            Conditions[] conditions = new Conditions[conditionString.length];
+            conditions = new Conditions[conditionString.length];
             for(int i = 0; i < conditionString.length; ++i) {
                 String[] condi = conditionString[i].split(" : ");
                 conditions[i] = new Conditions();
