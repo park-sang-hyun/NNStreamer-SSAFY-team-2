@@ -8,24 +8,17 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Camera;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.PixelCopy;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,27 +40,6 @@ import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Queue;
 
-class Conditions{
-    String name;
-    int count;
-
-    Conditions() {};
-
-    void setName(String _name){
-        this.name = _name;
-    }
-    String getName(){
-        return this.name;
-    }
-
-    void setCount(int _count){
-        this.count = _count;
-    }
-    int getCount(){
-        return this.count;
-    }
-}
-
 public class NNStreamerActivity extends Activity implements
         SurfaceHolder.Callback,
         View.OnClickListener, PixelCopy.OnPixelCopyFinishedListener {
@@ -87,10 +59,10 @@ public class NNStreamerActivity extends Activity implements
     private native void nativeSurfaceFinalize();
     private native String nativeGetName(int id, int option);
     private native String nativeGetDescription(int id, int option);
-    private native void nativeDeleteLineAndLabel();
-    private native void nativeInsertLineAndLabel();
-    private native void nativeGetCondition(Object[] conditions);
-    private native boolean nativeGetAutoCapture();
+    private native void nativeDeleteLineAndLabel(); /* Delete Line and Label in surfaceview */
+    private native void nativeInsertLineAndLabel(); /* Draw Line and Label in surfacefiew */
+    private native void nativeGetCondition(Object[] conditions); /* Set conditions to do auto-capture */
+    private native boolean nativeGetAutoCapture(); /* Get boolean value from jni to take picture in auto-mode */
     private long native_custom_data;      /* Native code will use this to keep private data */
 
     private int pipelineId = 0;
@@ -109,13 +81,9 @@ public class NNStreamerActivity extends Activity implements
     private TextView textViewConditionList;
     private TextView textViewCountDown;
 
-    private Boolean captureMode = false;
-    private Boolean checkFlag = false;
-
-    private  Conditions[] conditions;
-
-
-    private static final int CAMERA_REQUEST = 1888;
+    private Boolean captureMode = false; /* Check the status of auto/nonauto  */
+    private Boolean checkFlag = false; /* Check the condition is satisfyied in auto-mode */
+    private CountDownTimer timer = setCountDownText(3000, 1000); /* Set timer to count 3sec */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -147,13 +115,11 @@ public class NNStreamerActivity extends Activity implements
 
         stopPipelineTimer();
         nativePause();
-        //setMessage("onPause");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        //setMessage(initialized + "");
 
         /* Start pipeline */
         if (initialized) {
@@ -164,11 +130,11 @@ public class NNStreamerActivity extends Activity implements
             }
         }
 
-        textViewCountDown.setText("");
+        textViewCountDown.setText(""); /* Set the textview above of surfaceview */
+
+        /* Set the line and label  */
         if(captureMode) nativeInsertLineAndLabel();
         else nativeDeleteLineAndLabel();
-
-        if(conditions != null) nativeGetCondition(conditions);
     }
 
     @Override
@@ -201,7 +167,6 @@ public class NNStreamerActivity extends Activity implements
         runOnUiThread(new Runnable() {
             public void run() {
                 /* Update pipeline title and description here */
-
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
@@ -238,10 +203,50 @@ public class NNStreamerActivity extends Activity implements
         nativeSurfaceFinalize();
     }
 
+    /**
+     *  CountDown wtih parameters time, interval and Set text with onTick()
+     *  When finish this timer the takePicture() will start
+     */
+    public CountDownTimer setCountDownText(long time, long interval){
+        CountDownTimer countDownTimer = new CountDownTimer(time, interval) {
+            public void onTick(long millisUntilFinished) {
+                textViewCountDown.setText(String.format(Locale.getDefault(), "%d", Math.round(millisUntilFinished / 900L)));
+            }
+
+            public void onFinish() {
+                textViewCountDown.setText("Done.");
+                takePicture();
+            }
+        };
+        return countDownTimer;
+    }
+
+    /**
+     *  Get bitmap-image from surfaceView and send bitmap-array to PreviewActivity
+     */
+    public void takePicture(){
+        nativeDeleteLineAndLabel();
+        nativePause();
+
+        /* Get bitmap from Surface. (Surface -> bitmap) */
+        Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
+                surfaceView.getHeight(), Bitmap.Config.ARGB_8888);
+        PixelCopy.request(surfaceView,bitmap,NNStreamerActivity.this,new Handler(Looper.getMainLooper()));
+
+        /* Convert to byte_array to send huge size bitmap to another activity */
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,30,stream);
+        byte[] byteArray = stream.toByteArray();
+
+        /* Send bitmap(in byte_array) to PreviewActivity with Intent. */
+        Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
+        previewIntent.putExtra("photo", byteArray);
+        startActivity(previewIntent);
+    }
+
     @Override
     public void onClick(View v) {
-        /* View.OnClickListener interface implementation */
-        final int viewId = v.getId();
+        final int viewId = v.getId(); /* View.OnClickListener interface implementation */
 
         if (pipelineTimer != null) {
             /* Do nothing, new pipeline will be started soon. */
@@ -259,28 +264,34 @@ public class NNStreamerActivity extends Activity implements
                 pickerIntent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
                 pickerIntent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-                startActivityForResult(pickerIntent,100);
+                startActivity(pickerIntent);
                 break;
             case R.id.main_button_capture:
                 nativeDeleteLineAndLabel();
-                Log.d(TAG, "captureMode : "+captureMode);
+                /* Check the status of auto/non-auto*/
                 if(captureMode){
+                    /* This Thread is check the condition with camera from jni */
                     Thread checkCapture = new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            // TODO Auto-generated method stub
-                            Queue<Integer> queue = new LinkedList<>();
+                            Queue<Integer> queue = new LinkedList<>();  /* This Queue is filled with time to check how many true value in 1sec. */
+
                             while(true){
+                                /* If while check the automode value is changed break this loop*/
                                 if(!captureMode) return;
 
-                                Date date = new Date(System.currentTimeMillis());
+                                Date date = new Date(System.currentTimeMillis()); /* Get and Set current time */
                                 SimpleDateFormat sdfNow = new SimpleDateFormat("HHmmss");
                                 String formatDate = sdfNow.format(date);
                                 int now = Integer.parseInt(formatDate);
                                 Log.d(TAG, "In Thread : " + now + " , " + queue.size());
+
+                                /* If the conditions are satisfying add current time to Queue */
                                 if(nativeGetAutoCapture()){
                                     queue.add(now);
                                 }
+
+                                /* Check the value have to poll-out cause the value has 1sec more than current */
                                 if(!queue.isEmpty()) {
                                     int head = queue.peek();
                                     if (Math.abs(now - head) > 10) {
@@ -288,15 +299,15 @@ public class NNStreamerActivity extends Activity implements
                                     }
                                     if (queue.size() > 30) {
                                         checkFlag = true;
-                                        break;
+                                        return;
                                     }
                                 }
                             }
                         }
                     });
-
                     checkCapture.start();
 
+                    /* Thie Thread is waiting the checkCapture Thread will be die */
                     Thread take = new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -304,18 +315,8 @@ public class NNStreamerActivity extends Activity implements
                                 if(!captureMode) return;
                             }
 
-                            nativePause();
-                            Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
-                                    surfaceView.getHeight(), Bitmap.Config.ARGB_8888);
-                            PixelCopy.request(surfaceView, bitmap, NNStreamerActivity.this, new Handler(Looper.getMainLooper()));
-                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
-                            byte[] byteArray = stream.toByteArray();
+                            timer.start(); /* When the checkCapure change the checkFlag value start countdown and take photo */
 
-                            Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
-                            previewIntent.putExtra("photo", byteArray);
-                            startActivity(previewIntent);
-                            nativeInsertLineAndLabel();
                             checkFlag = false;
                             return;
                         }
@@ -323,18 +324,8 @@ public class NNStreamerActivity extends Activity implements
 
                     take.start();
                 }else{
-                    nativePause();
-                    Bitmap bitmap = Bitmap.createBitmap(surfaceView.getWidth(),
-                            surfaceView.getHeight(), Bitmap.Config.ARGB_8888);;
-                    PixelCopy.request(surfaceView,bitmap,NNStreamerActivity.this,new Handler());
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG,30,stream);
-                    byte[] byteArray = stream.toByteArray();
-
-                    Intent previewIntent = new Intent(NNStreamerActivity.this, PreviewActivity.class);
-                    previewIntent.putExtra("photo", byteArray);
-                    startActivity(previewIntent);
-                    nativeInsertLineAndLabel();
+                    /* Take photo in non-auto mode */
+                    takePicture();
                 }
                 break;
             default:
@@ -342,31 +333,37 @@ public class NNStreamerActivity extends Activity implements
         }
     }
 
+    /**
+     *  Get data from finished Activity
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        /* requestCode 200 is SettingActivity */
         if(requestCode == 200 && resultCode == RESULT_OK){
+            /* Get ConditionList in Intent */
             String conditionList = data.getStringExtra("conditionList");
-            String conditionDisplay = ""; // to show conditionList on screen
+            String conditionDisplay = ""; /* to show conditionList on screen */
 
             String[] conditionString = conditionList.split("\n");
-            conditions = new Conditions[conditionString.length];
+            Conditions[] conditions = new Conditions[conditionString.length];
             for(int i = 0; i < conditionString.length; ++i) {
                 String[] condi = conditionString[i].split(" : ");
                 conditions[i] = new Conditions();
                 conditions[i].setName(condi[0]);
                 conditions[i].setCount(Integer.parseInt(condi[1]));
 
-                conditionDisplay += conditionString[i] + "  "; // to show conditionList on screen
+                conditionDisplay += conditionString[i] + "  "; /* to show conditionList on screen */
             }
             nativeGetCondition(conditions);
             textViewConditionList.setText(conditionDisplay);
-        }else if(requestCode == 100){
+        }else if(requestCode == 100){ /* Camera gallery result */
             if(resultCode == RESULT_OK && data != null)
             {
                 try{
+                    /* Get Image from gallery*/
                     InputStream in = getContentResolver().openInputStream(data.getData());
-
                     Bitmap img = BitmapFactory.decodeStream(in);
                     in.close();
 
@@ -379,16 +376,19 @@ public class NNStreamerActivity extends Activity implements
                     startActivity(selectedImageIntent);
                 }catch(Exception e)
                 {
-
+                    Log.e(TAG, e.toString());
                 }
             }
-            else if(resultCode == RESULT_CANCELED)
+            else if(resultCode == RESULT_CANCELED) /* Cancel selecting image */
             {
                 Toast.makeText(this, "사진 선택 취소", Toast.LENGTH_LONG).show();
             }
         }
     }
 
+    /**
+     *  Set status with toggle of auto/non-auto mode
+     */
     public void onToggleClicked(View v){
         boolean on = ((ToggleButton) v).isChecked();
 
@@ -457,6 +457,7 @@ public class NNStreamerActivity extends Activity implements
 
         setContentView(R.layout.main);
 
+
         buttonSetting = (ImageButton) this.findViewById(R.id.main_button_setting);
         buttonSetting.setOnClickListener(this);
 
@@ -475,8 +476,6 @@ public class NNStreamerActivity extends Activity implements
         SurfaceHolder sh = surfaceView.getHolder();
         sh.addCallback(this);
 
-        /* Start with disabled buttons, until the pipeline in native code is initialized. */
-//        enableButton(false);
 
         initialized = true;
     }
@@ -486,10 +485,8 @@ public class NNStreamerActivity extends Activity implements
      */
     private void startPipeline(int newId) {
         pipelineId = newId;
-//        enableButton(false);
 
-        /* Pause current pipeline and start new pipeline */
-        nativePause();
+        nativePause(); /* Pause current pipeline and start new pipeline */
 
         if (checkModels()) {
             setPipelineTimer();

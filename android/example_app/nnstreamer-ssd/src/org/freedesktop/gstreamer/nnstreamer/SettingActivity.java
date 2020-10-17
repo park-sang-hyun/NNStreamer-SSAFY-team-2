@@ -2,7 +2,6 @@ package org.freedesktop.gstreamer.nnstreamer;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class SettingActivity extends Activity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
-
     private boolean initialized = false;
 
     private Button buttonAdd;
@@ -103,7 +101,6 @@ public class SettingActivity extends Activity implements View.OnClickListener, A
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        //adapterView.getItemAtPosition(i)
         selectedObject = adapterView.getItemAtPosition(i).toString();
     }
 

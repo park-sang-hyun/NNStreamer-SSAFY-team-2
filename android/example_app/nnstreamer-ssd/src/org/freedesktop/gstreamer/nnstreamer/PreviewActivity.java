@@ -4,19 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PreviewActivity extends Activity implements View.OnClickListener {
-
     private boolean initialized = false;
 
     private ImageView imageView_preview;
@@ -106,9 +99,6 @@ public class PreviewActivity extends Activity implements View.OnClickListener {
             boolean flag = bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.flush();
             out.close();
-
-//            Toast.makeText(PreviewActivity.this, string_path+file_name, Toast.LENGTH_LONG).show();
-//            Toast.makeText(PreviewActivity.this, flag+"", Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
             File file = new File(string_path);
